@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const Update = () => {
     const { id } = useParams();
@@ -14,25 +15,25 @@ const Update = () => {
         priceUsd: '',
         volume: { h24: '', h6: '', h1: '', m5: '' }
     });
-    
+
     // Fetch data for pre-filling the form
     useEffect(() => {
         fetchData();
     }, []);
-    
+
     // Function to fetch existing data
     const fetchData = async () => {
         try {
             // Make a GET request to fetch existing data
-            const response = await axios.get(`http://localhost:7000/api/getdataById/${id}`); // Replace ':id' with the actual ID
+            const response = await axios.get(`${API_URL}/getdataById/${id}`); // Replace ':id' with the actual ID
             // Update the form data state with the fetched data
             setFormData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
-    
-    
+
+
     // Function to handle form input changes
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -53,7 +54,7 @@ const Update = () => {
         }
     };
 
-    
+
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -66,7 +67,7 @@ const Update = () => {
             console.error('Error updating data:', error);
         }
     };
-    
+
     return (
         <>
             <Navbar />

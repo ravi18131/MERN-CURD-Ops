@@ -5,6 +5,10 @@ import Footer from '../components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import createimg from "../img/create.jpeg"
 
+const API_URL = process.env.REACT_APP_API_URL;
+// console.log(API_URL);
+
+
 function Create() {
     const [formData, setFormData] = useState({
         priceNative: '',
@@ -43,7 +47,7 @@ function Create() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:7000/api/postdata', formData);
+            await axios.post(`${API_URL}/postdata`, formData);
             alert('Data added successfully!');
             // Clear form data after submission
             setFormData({
